@@ -17,7 +17,7 @@ class Article
      */
     public function __construct(
 
-        public ArticleId $id{
+        private(set) ArticleId $id{
             set => $this->id = $value;
             get => $this->id;
         },
