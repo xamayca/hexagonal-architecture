@@ -25,7 +25,7 @@ class ArticleIdTest extends TestCase
      * @return array<string, array{ id: int|string, expected: int|string }>
      *
      */
-    public static function dataProviderArticleIdUseCases(): array
+    public static function dataProviderArticleId(): array
     {
         return [
             'int 1 value' => [
@@ -50,10 +50,10 @@ class ArticleIdTest extends TestCase
     /**
      * @throws NegativeArticleIdException
      */
-    #[DataProvider('dataProviderArticleIdUseCases')]
+    #[DataProvider('dataProviderArticleId')]
     public function test_create_article_id_value_object(int|string $id, int|string $expected): void
     {
-        $id = new ArticleId($id);
+        $id = new ArticleId(value: $id);
         $this->assertSame($expected, $id->value);
     }
 
@@ -62,7 +62,7 @@ class ArticleIdTest extends TestCase
         $this->expectException(NegativeArticleIdException::class);
         $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
 
-        new ArticleId(-1);
+        new ArticleId(value: -1);
     }
 
 }
