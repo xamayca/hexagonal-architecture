@@ -11,7 +11,7 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
-#[CoversClass(Article::class)]
+#[CoversClass(InMemoryArticleRepository::class)]
 class InMemoryArticleRepositoryTest extends TestCase
 {
     private InMemoryArticleRepository $repository;
@@ -53,7 +53,7 @@ class InMemoryArticleRepositoryTest extends TestCase
      *
      * @return array<string, array{ method: string }>
      */
-    public static function dataProviderArticleRepositoryMethodNameUseCases(): array
+    public static function dataProviderArticleRepositoryMethodName(): array
     {
         return [
             'method add' => ['method' => 'add'],
@@ -67,8 +67,8 @@ class InMemoryArticleRepositoryTest extends TestCase
     /**
      * @throws NegativeArticleIdException
      */
-    #[DataProvider('dataProviderArticleRepositoryMethodNameUseCases')]
-    public function test_in_memory_repository_implements_article_repository_interface_method(string $method): void
+    #[DataProvider('dataProviderArticleRepositoryMethodName')]
+    public function test_in_memory_repository_implements_article_repository_interface(string $method): void
     {
         $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository);
         $this->assertTrue(method_exists($this->repository, $method));

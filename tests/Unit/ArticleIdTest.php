@@ -57,7 +57,7 @@ class ArticleIdTest extends TestCase
         $this->assertSame($expected, $id->value);
     }
 
-    public function test_create_article_id_value_object_with_negative_int_throw_exception(): void
+    public function test_create_article_id_value_object_with_negative_int_throws_exception(): void
     {
         $this->expectException(NegativeArticleIdException::class);
         $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
