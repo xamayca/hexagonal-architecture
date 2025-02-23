@@ -45,7 +45,9 @@ class InMemoryArticleRepositoryTest extends TestCase
      * Fournit des cas d'utilisation pour tester les méthodes du dépôt d'articles.
      *
      * Chaque cas teste la disponibilité des méthodes de l'interface ArticleRepositoryInterface dans
-     * la classe InMemoryArticleRepository. Les méthodes suivantes sont couvertes :
+     * la classe InMemoryArticleRepository.
+     *
+     * Les méthodes suivantes sont couvertes :
      * - add : Ajoute un article au dépôt.
      * - get : Récupère un article par son identifiant.
      * - update : Met à jour un article existant dans le dépôt.
