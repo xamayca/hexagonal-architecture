@@ -4,6 +4,7 @@ namespace App\Tests\Unit;
 
 use App\Article\Application\Repository\InMemoryArticleRepository;
 use App\Article\Domain\Entity\Article;
+use App\Article\Domain\Exception\EmptyArticleIdException;
 use App\Article\Domain\Exception\NegativeArticleIdException;
 use App\Article\Domain\Repository\ArticleRepositoryInterface;
 use App\Article\Domain\ValueObject\ArticleId;
@@ -27,7 +28,8 @@ class InMemoryArticleRepositoryTest extends TestCase
      *   - id : ArticleId
      *   - title : "InMemory Article Test"
      *
-     * @throws NegativeArticleIdException Si l'ID de l'article est négatif.
+     * @throws NegativeArticleIdException
+     * @throws EmptyArticleIdException
      */
     protected function setUp(): void
     {
@@ -38,18 +40,6 @@ class InMemoryArticleRepositoryTest extends TestCase
 
     /**
      * Fournit des cas d'utilisation pour tester les méthodes du dépôt d'articles.
-     *
-     * Chaque cas teste la disponibilité des méthodes de l'interface ArticleRepositoryInterface dans
-     * la classe InMemoryArticleRepository.
-     *
-     * Les méthodes suivantes sont couvertes :
-     * - add : Ajoute un article au dépôt.
-     * - get : Récupère un article par son identifiant.
-     * - update : Met à jour un article existant dans le dépôt.
-     * - delete : Supprime un article du dépôt par son identifiant.
-     * - all : Récupère tous les articles du dépôt.
-     *
-     * Chaque entrée du tableau retourne le nom de la méthode à tester.
      *
      * @return array<string, array{ method: string }>
      */
@@ -70,8 +60,8 @@ class InMemoryArticleRepositoryTest extends TestCase
     #[DataProvider('dataProviderArticleRepositoryMethodName')]
     public function test_in_memory_repository_implements_article_repository_interface(string $method): void
     {
-        $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository);
-        $this->assertTrue(method_exists($this->repository, $method));
+        $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository, 'The repository should implement ArticleRepositoryInterface.');
+        $this->assertTrue(method_exists($this->repository, $method), "Method '{$method}' does not exist in InMemoryArticleRepository.");
     }
 
     public function test_in_memory_repository_add_article(): void
@@ -79,13 +69,14 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->repository->add($this->article);
         $entity = $this->repository->get($this->articleId);
 
-        $this->assertInstanceOf(Article::class, $entity);
-        $this->assertSame($this->articleId, $entity->id);
-        $this->assertSame($this->article->title, $entity->title);
+        $this->assertInstanceOf(Article::class, $entity, 'The added article should be an instance of Article.');
+        $this->assertSame($this->articleId, $entity->id, 'The article ID should match the expected ID.');
+        $this->assertSame($this->article->title, $entity->title, 'The article title should match the expected title.');
     }
 
     /**
      * @throws NegativeArticleIdException
+     * @throws EmptyArticleIdException
      */
     public function test_in_memory_repository_get_article_by_id(): void
     {
@@ -98,16 +89,16 @@ class InMemoryArticleRepositoryTest extends TestCase
         $article1 = $this->repository->get($this->articleId);
         $article2 = $this->repository->get($article2Id);
 
-        $this->assertInstanceOf(Article::class, $article1);
-        $this->assertSame($this->articleId, $article1->id);
-        $this->assertSame($this->article->title, $article1->title);
+        $this->assertInstanceOf(Article::class, $article1, 'The first retrieved article should be an instance of Article.');
+        $this->assertSame($this->articleId, $article1->id, 'The ID of the first article should match the expected ID.');
+        $this->assertSame($this->article->title, $article1->title, 'The title of the first article should match the expected title.');
 
-        $this->assertInstanceOf(Article::class, $article2);
-        $this->assertSame($article2Id, $article2->id);
-        $this->assertSame($article2->title, $article2->title);
+        $this->assertInstanceOf(Article::class, $article2, 'The second retrieved article should be an instance of Article.');
+        $this->assertSame($article2Id, $article2->id, 'The ID of the second article should match the expected ID.');
+        $this->assertSame($article2->title, $article2->title, 'The title of the second article should match the expected title.');
 
-        $this->assertNotSame($article1, $article2);
-        $this->assertNotSame($article1->title, $article2->title);
+        $this->assertNotSame($article1, $article2, 'The two articles should not be the same instance.');
+        $this->assertNotSame($article1->title, $article2->title, 'The titles of the two articles should not be the same.');
     }
 
     public function test_in_memory_repository_update_article(): void
@@ -120,15 +111,16 @@ class InMemoryArticleRepositoryTest extends TestCase
 
         $entity = $this->repository->get($this->articleId);
 
-        $this->assertInstanceOf(Article::class, $entity);
-        $this->assertSame('New InMemory Article Test', $entity->title);
-        $this->assertNotSame($this->article->title, $entity->title);
+        $this->assertInstanceOf(Article::class, $entity, 'The updated article should be an instance of Article.');
+        $this->assertSame($updatedArticle->title, $entity->title, 'The title of the updated article should match the new title.');
+        $this->assertNotSame($this->article->title, $entity->title, 'The title of the updated article should not be the same as the original title.');
     }
 
     /**
      * @throws NegativeArticleIdException
+     * @throws EmptyArticleIdException
      */
-    public function test_get_all_article_in_memory_repository(): void
+    public function test_in_memory_repository_get_all_article(): void
     {
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
@@ -138,17 +130,17 @@ class InMemoryArticleRepositoryTest extends TestCase
 
         $collection = $this->repository->all();
 
-        $this->assertCount(2, $collection);
+        $this->assertCount(2, $collection, 'The collection should contain exactly 2 articles.');
     }
 
-    public function test_delete_article_by_id_in_memory_repository(): void
+    public function test_in_memory_repository_delete_article_by_id(): void
     {
         $this->repository->add($this->article);
         $this->repository->delete($this->article->id);
 
         $collection = $this->repository->all();
 
-        $this->assertCount(0, $collection);
+        $this->assertCount(0, $collection, 'The collection should be empty after deleting the article.');
     }
 
 }

@@ -8,6 +8,7 @@ class Article
 {
     /**
      * Classe Article.
+     *
      * @param ArticleId $id
      * @param string $title
      * Cette classe représente un article dans le domaine de l'application.
