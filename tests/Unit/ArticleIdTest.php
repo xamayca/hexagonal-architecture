@@ -2,6 +2,7 @@
 
 namespace App\Tests\Unit;
 
+use App\Article\Domain\Exception\EmptyArticleIdException;
 use App\Article\Domain\Exception\NegativeArticleIdException;
 use App\Article\Domain\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -51,18 +52,26 @@ class ArticleIdTest extends TestCase
      * @throws NegativeArticleIdException
      */
     #[DataProvider('dataProviderArticleId')]
-    public function test_create_article_id_value_object(int|string $id, int|string $expected): void
+    public function test_article_id_value_object_created(int|string $id, int|string $expected): void
     {
-        $id = new ArticleId(value: $id);
-        $this->assertSame($expected, $id->value);
+        $articleId = new ArticleId(value: $id);
+        $this->assertSame($expected, $articleId->value, "The value stored in ArticleId should match the expected value.");
     }
 
-    public function test_create_article_id_value_object_with_negative_int_throws_exception(): void
+    public function test_article_id_value_object_created_with_negative_int_value_throws_exception(): void
     {
         $this->expectException(NegativeArticleIdException::class);
         $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
 
         new ArticleId(value: -1);
+    }
+
+    public function test_article_id_value_object_created_with_empty_string_throws_exception(): void
+    {
+        $this->expectException(EmptyArticleIdException::class);
+        $this->expectExceptionMessage('Invalid value "" provided for "ArticleId". The value cannot be empty.');
+
+        new ArticleId(value: '');
     }
 
 }
