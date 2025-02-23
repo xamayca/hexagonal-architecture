@@ -64,7 +64,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertTrue(method_exists($this->repository, $method), "Method '{$method}' does not exist in InMemoryArticleRepository.");
     }
 
-    public function test_in_memory_repository_add_article(): void
+    public function test_in_memory_repository_method_add_article(): void
     {
         $this->repository->add($this->article);
         $entity = $this->repository->get($this->articleId);
@@ -78,7 +78,7 @@ class InMemoryArticleRepositoryTest extends TestCase
      * @throws NegativeArticleIdException
      * @throws EmptyArticleIdException
      */
-    public function test_in_memory_repository_get_article_by_id(): void
+    public function test_in_memory_repository_method_get_article_by_id(): void
     {
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
@@ -101,7 +101,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertNotSame($article1->title, $article2->title, 'The titles of the two articles should not be the same.');
     }
 
-    public function test_in_memory_repository_update_article(): void
+    public function test_in_memory_repository_method_update_article(): void
     {
         $this->repository->add($this->article);
 
@@ -120,7 +120,7 @@ class InMemoryArticleRepositoryTest extends TestCase
      * @throws NegativeArticleIdException
      * @throws EmptyArticleIdException
      */
-    public function test_in_memory_repository_get_all_article(): void
+    public function test_in_memory_repository_method_get_all_article(): void
     {
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
@@ -133,7 +133,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertCount(2, $collection, 'The collection should contain exactly 2 articles.');
     }
 
-    public function test_in_memory_repository_delete_article_by_id(): void
+    public function test_in_memory_repository_method_delete_article_by_id(): void
     {
         $this->repository->add($this->article);
         $this->repository->delete($this->article->id);
