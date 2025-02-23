@@ -27,7 +27,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->article = new Article(id: $this->articleId, title: 'InMemory Article Test');
     }
 
-    public function test_add_article_to_in_memory_repository(): void
+    public function test_add_article_in_memory_repository(): void
     {
         $this->repository->add($this->article);
         $entity = $this->repository->get($this->articleId);
@@ -60,6 +60,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertSame($article2->title, $article2->title);
 
         $this->assertNotSame($article1, $article2);
+        $this->assertNotSame($article1->title, $article2->title);
     }
 
     public function test_update_article_in_memory_repository(): void
