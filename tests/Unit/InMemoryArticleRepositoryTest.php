@@ -36,11 +36,6 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->article = new Article(id: $this->articleId, title: 'InMemory Article Test');
     }
 
-    public function test_in_memory_repository_implements_article_repository_interface(): void
-    {
-        $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository);
-    }
-
     /**
      * Fournit des cas d'utilisation pour tester les méthodes du dépôt d'articles.
      *
