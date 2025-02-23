@@ -7,7 +7,6 @@ use App\Article\Domain\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
-use Random\RandomException;
 
 #[CoversClass(ArticleId::class)]
 class ArticleIdTest extends TestCase
@@ -24,8 +23,6 @@ class ArticleIdTest extends TestCase
      * Et vérifie que la valeur stockée correspond à la valeur attendue.
      *
      * @return array<string, array{ id: int|string, expected: int|string }>
-     * @throws RandomException
-     * @throws NegativeArticleIdException
      *
      */
     public static function dataProviderArticleIdUseCases(): array
@@ -61,10 +58,10 @@ class ArticleIdTest extends TestCase
     public function test_create_article_id_value_object(int|string $id, int|string $expected): void
     {
         $id = new ArticleId($id);
-        $this->assertEquals($expected, $id->value);
+        $this->assertSame($expected, $id->value);
     }
 
-    public function test_create_article_id_with_negative_value(): void
+    public function test_create_article_id_value_object_with_negative_int_throw_exception(): void
     {
         $this->expectException(NegativeArticleIdException::class);
         $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');

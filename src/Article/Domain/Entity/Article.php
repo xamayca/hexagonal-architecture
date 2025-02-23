@@ -17,12 +17,12 @@ class Article
      */
     public function __construct(
 
-        private(set) ArticleId $id{
+        public ArticleId $id{
             set => $this->id = $value;
             get => $this->id;
         },
 
-        private(set) string $title {
+        public string $title {
             get => $this->title;
             set => $this->title = $value;
         },

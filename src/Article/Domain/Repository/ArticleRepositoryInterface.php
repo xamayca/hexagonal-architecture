@@ -10,13 +10,12 @@ use App\Article\Domain\ValueObject\ArticleId;
  * Interface ArticleRepositoryInterface
  * @package App\Article\Domain\Repository
  * Cette interface représente le contrat que doit respecter un repository de post.
- * * Elle contient les méthodes suivantes :
- * * - add (Article $post) : ajoute un post
- * * - update (Article $post) : met à jour un post
- * * - remove (ArticleId $id) : supprime un post
- * * - get (ArticleId $id) : récupère un post par son identifiant
- * * - all() : récupère tous les posts
- * * - generateId() : génère un identifiant de post (en général, un UUID ou un entier auto-incrémenté)
+ *  Elle contient les méthodes suivantes :
+ *  - add (Article $post) : ajoute un post
+ *  - update (Article $post) : met à jour un post
+ *  - remove (ArticleId $id) : supprime un post
+ *  - get (ArticleId $id) : récupère un post par son identifiant
+ *  - all() : récupère tous les posts
  */
 interface ArticleRepositoryInterface
 {
@@ -51,9 +50,4 @@ interface ArticleRepositoryInterface
      */
     public function all(): array;
 
-    /**
-     * Génère un identifiant de post (en général, un UUID, un Ulid ou un entier auto-incrémenté)
-     * @return ArticleId
-     */
-    public function generateId(): ArticleId;
 }

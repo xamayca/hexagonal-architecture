@@ -12,7 +12,7 @@ readonly class ArticleId
      * @param int|string $value
      * Cette classe représente l'identifiant d'un post dans le domaine.
      * * Elle est immuable et ne peut être modifiée une fois instanciée.
-     * * Le type string est utilisé pour l'identifiant afin de permettre une flexibilité maximale (int, string, uuid, etc.).
+     * * Le type int|string est utilisé pour l'identifiant afin de permettre une flexibilité maximale (int, string, uuid, etc.).
      * * La propriété $value contient la valeur de l'identifiant du post, passée lors de l'instanciation de la classe.
      * @throws NegativeArticleIdException
      */
