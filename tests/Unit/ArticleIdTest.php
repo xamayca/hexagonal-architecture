@@ -62,20 +62,24 @@ class ArticleIdTest extends TestCase
     /**
      * @throws EmptyArticleIdException
      */
-    public function test_article_id_value_object_created_with_negative_int_value_throws_exception(): void
-    {
-        $this->expectException(NegativeArticleIdException::class);
-        $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
-
-        new ArticleId(value: -1);
-    }
-
     public function test_article_id_value_object_created_with_empty_string_throws_exception(): void
     {
         $this->expectException(EmptyArticleIdException::class);
         $this->expectExceptionMessage('Invalid value "" provided for "ArticleId". The value cannot be empty.');
 
         new ArticleId(value: '');
+    }
+
+    /**
+     * @throws NegativeArticleIdException
+     * @throws EmptyArticleIdException
+     */
+    public function test_article_id_value_object_created_with_negative_int_value_throws_exception(): void
+    {
+        $this->expectException(NegativeArticleIdException::class);
+        $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
+
+        new ArticleId(value: -1);
     }
 
 }
