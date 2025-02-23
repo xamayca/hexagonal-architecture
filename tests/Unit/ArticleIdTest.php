@@ -28,26 +28,22 @@ class ArticleIdTest extends TestCase
     public static function dataProviderArticleIdUseCases(): array
     {
         return [
-            'int 1 value' =>
-                [
-                    'id' => 1,
-                    'expected' => 1,
-                ],
-            'hash 256 value' =>
-                [
-                    'id' => $hash256 = hash('sha256', 'Hashed 256 Article ID'),
-                    'expected' => $hash256,
-                ],
-            'hash 512 value' =>
-                [
-                    'id' => $hash512 = hash('sha512', 'Hashed 512 Article ID'),
-                    'expected' => $hash512,
-                ],
-            'uniqid value' =>
-                [
-                    'id' => $uuid = uniqid(),
-                    'expected' => $uuid,
-                ],
+            'int 1 value' => [
+                'id' => 1,
+                'expected' => 1,
+            ],
+            'hash 256 value' => [
+                'id' => $hash256 = hash('sha256', 'Hashed 256 Article ID'),
+                'expected' => $hash256,
+            ],
+            'hash 512 value' => [
+                'id' => $hash512 = hash('sha512', 'Hashed 512 Article ID'),
+                'expected' => $hash512,
+            ],
+            'uniqid value' => [
+                'id' => $uuid = uniqid(),
+                'expected' => $uuid,
+            ],
         ];
     }
 
