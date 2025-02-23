@@ -50,6 +50,7 @@ class ArticleIdTest extends TestCase
 
     /**
      * @throws NegativeArticleIdException
+     * @throws EmptyArticleIdException
      */
     #[DataProvider('dataProviderArticleId')]
     public function test_article_id_value_object_created(int|string $id, int|string $expected): void
@@ -58,6 +59,9 @@ class ArticleIdTest extends TestCase
         $this->assertSame($expected, $articleId->value, "The value stored in ArticleId should match the expected value.");
     }
 
+    /**
+     * @throws EmptyArticleIdException
+     */
     public function test_article_id_value_object_created_with_negative_int_value_throws_exception(): void
     {
         $this->expectException(NegativeArticleIdException::class);
