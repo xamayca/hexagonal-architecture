@@ -16,7 +16,7 @@ class CreateArticleTest extends TestCase
      */
     public function test_create_article(): void
     {
-        $articleId = new ArticleId(1);
+        $articleId = new ArticleId(value: 1);
         $article = new Article(id: $articleId, title: 'Test Article');
 
         $this->assertEquals(1, $article->id->value);
