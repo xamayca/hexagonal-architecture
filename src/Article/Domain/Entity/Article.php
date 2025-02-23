@@ -7,7 +7,7 @@ use App\Article\Domain\ValueObject\ArticleId;
 class Article
 {
     /**
-     * Article constructor.
+     * Classe Article.
      * @param ArticleId $id
      * @param string $title
      * Cette classe représente un article dans le domaine de l'application.
@@ -22,7 +22,7 @@ class Article
             get => $this->id;
         },
 
-        public string $title {
+        private(set) string $title {
             get => $this->title;
             set => $this->title = $value;
         },

@@ -74,7 +74,7 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertTrue(method_exists($this->repository, $method));
     }
 
-    public function test_add_article_in_memory_repository(): void
+    public function test_in_memory_repository_add_article(): void
     {
         $this->repository->add($this->article);
         $entity = $this->repository->get($this->articleId);
@@ -87,7 +87,7 @@ class InMemoryArticleRepositoryTest extends TestCase
     /**
      * @throws NegativeArticleIdException
      */
-    public function test_get_article_by_id_in_memory_repository(): void
+    public function test_in_memory_repository_get_article_by_id(): void
     {
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
@@ -110,11 +110,12 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertNotSame($article1->title, $article2->title);
     }
 
-    public function test_update_article_in_memory_repository(): void
+    public function test_in_memory_repository_update_article(): void
     {
         $this->repository->add($this->article);
 
         $updatedArticle = new Article(id: $this->articleId, title: 'New InMemory Article Test');
+
         $this->repository->update($updatedArticle);
 
         $entity = $this->repository->get($this->articleId);
