@@ -5,8 +5,10 @@ namespace App\Tests\Unit;
 use App\Article\Application\Repository\InMemoryArticleRepository;
 use App\Article\Domain\Entity\Article;
 use App\Article\Domain\Exception\NegativeArticleIdException;
+use App\Article\Domain\Repository\ArticleRepositoryInterface;
 use App\Article\Domain\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 #[CoversClass(Article::class)]
@@ -17,14 +19,62 @@ class InMemoryArticleRepositoryTest extends TestCase
     private ArticleId $articleId;
 
     /**
-     * Configuration pour chaque test
-     * @throws NegativeArticleIdException
+     * Configuration exécutée avant chaque test.
+     *
+     * - Crée une instance de InMemoryArticleRepository.
+     * - Crée un nouvel ArticleId avec la valeur "1".
+     * - Crée un nouvel Article avec les propriétés suivantes :
+     *   - id : ArticleId
+     *   - title : "InMemory Article Test"
+     *
+     * @throws NegativeArticleIdException Si l'ID de l'article est négatif.
      */
     protected function setUp(): void
     {
         $this->repository = new InMemoryArticleRepository();
         $this->articleId = new ArticleId(value: 1);
         $this->article = new Article(id: $this->articleId, title: 'InMemory Article Test');
+    }
+
+    public function test_in_memory_repository_implements_article_repository_interface(): void
+    {
+        $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository);
+    }
+
+    /**
+     * Fournit des cas d'utilisation pour tester les méthodes du dépôt d'articles.
+     *
+     * Chaque cas teste la disponibilité des méthodes de l'interface ArticleRepositoryInterface dans
+     * la classe InMemoryArticleRepository. Les méthodes suivantes sont couvertes :
+     * - add : Ajoute un article au dépôt.
+     * - get : Récupère un article par son identifiant.
+     * - update : Met à jour un article existant dans le dépôt.
+     * - delete : Supprime un article du dépôt par son identifiant.
+     * - all : Récupère tous les articles du dépôt.
+     *
+     * Chaque entrée du tableau retourne le nom de la méthode à tester.
+     *
+     * @return array<string, array{ method: string }>
+     */
+    public static function dataProviderArticleRepositoryMethodNameUseCases(): array
+    {
+        return [
+            'method add' => ['method' => 'add'],
+            'method get' => ['method' => 'get'],
+            'method update' => ['method' => 'update'],
+            'method delete' => ['method' => 'delete'],
+            'method all' => ['method' => 'all'],
+        ];
+    }
+
+    /**
+     * @throws NegativeArticleIdException
+     */
+    #[DataProvider('dataProviderArticleRepositoryMethodNameUseCases')]
+    public function test_in_memory_repository_implements_article_repository_interface_method(string $method): void
+    {
+        $this->assertInstanceOf(ArticleRepositoryInterface::class, $this->repository);
+        $this->assertTrue(method_exists($this->repository, $method));
     }
 
     public function test_add_article_in_memory_repository(): void
