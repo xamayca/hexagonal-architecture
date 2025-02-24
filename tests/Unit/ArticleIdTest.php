@@ -3,7 +3,7 @@
 namespace App\Tests\Unit;
 
 use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\NegativeArticleIdException;
+use App\Article\Domain\Exception\InvalidArticleIdException;
 use App\Article\Domain\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -49,7 +49,7 @@ class ArticleIdTest extends TestCase
     }
 
     /**
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     #[DataProvider('dataProviderArticleId')]
@@ -71,13 +71,13 @@ class ArticleIdTest extends TestCase
     }
 
     /**
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     public function test_article_id_value_object_created_with_negative_int_value_throws_exception(): void
     {
-        $this->expectException(NegativeArticleIdException::class);
-        $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative.');
+        $this->expectException(InvalidArticleIdException::class);
+        $this->expectExceptionMessage('Invalid value "-1" provided for "ArticleId". The value cannot be negative or zero.');
 
         new ArticleId(value: -1);
     }

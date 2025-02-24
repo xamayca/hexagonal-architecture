@@ -3,7 +3,7 @@
 namespace App\Article\Domain\ValueObject;
 
 use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\NegativeArticleIdException;
+use App\Article\Domain\Exception\InvalidArticleIdException;
 
 readonly class ArticleId
 {
@@ -15,7 +15,7 @@ readonly class ArticleId
      * * Elle est immuable et ne peut être modifiée une fois instanciée.
      * * Le type int|string est utilisé pour l'identifiant afin de permettre une flexibilité maximale (int, string, uuid, etc.).
      * * La propriété $value contient la valeur de l'identifiant du post, passée lors de l'instanciation de la classe.
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     public function __construct(
@@ -29,8 +29,8 @@ readonly class ArticleId
             throw new EmptyArticleIdException($this->value);
         }
 
-        if (is_int($this->value) && $this->value < 0) {
-            throw new NegativeArticleIdException($this->value);
+        if (is_int($this->value) && $this->value < 1) {
+            throw new InvalidArticleIdException($this->value);
         }
 
     }

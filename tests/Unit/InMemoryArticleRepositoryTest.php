@@ -5,7 +5,7 @@ namespace App\Tests\Unit;
 use App\Article\Application\Repository\InMemoryArticleRepository;
 use App\Article\Domain\Entity\Article;
 use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\NegativeArticleIdException;
+use App\Article\Domain\Exception\InvalidArticleIdException;
 use App\Article\Domain\Repository\ArticleRepositoryInterface;
 use App\Article\Domain\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -28,7 +28,7 @@ class InMemoryArticleRepositoryTest extends TestCase
      *   - id : ArticleId
      *   - title : "InMemory Article Test"
      *
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     protected function setUp(): void
@@ -55,7 +55,7 @@ class InMemoryArticleRepositoryTest extends TestCase
     }
 
     /**
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      */
     #[DataProvider('dataProviderArticleRepositoryMethodName')]
     public function test_in_memory_repository_implements_article_repository_interface(string $method): void
@@ -75,7 +75,7 @@ class InMemoryArticleRepositoryTest extends TestCase
     }
 
     /**
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     public function test_in_memory_repository_method_get_article_by_id(): void
@@ -117,7 +117,7 @@ class InMemoryArticleRepositoryTest extends TestCase
     }
 
     /**
-     * @throws NegativeArticleIdException
+     * @throws InvalidArticleIdException
      * @throws EmptyArticleIdException
      */
     public function test_in_memory_repository_method_get_all_article(): void
