@@ -2,12 +2,12 @@
 
 namespace App\Tests\Unit;
 
-use App\Article\Application\Repository\InMemoryArticleRepository;
-use App\Article\Domain\Entity\Article;
-use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\InvalidArticleIdException;
-use App\Article\Domain\Repository\ArticleRepositoryInterface;
-use App\Article\Domain\ValueObject\ArticleId;
+use Application\Article\Adapter\InMemoryArticleRepository;
+use Domain\Article\Entity\Article;
+use Domain\Article\Exception\EmptyArticleIdException;
+use Domain\Article\Exception\InvalidArticleIdException;
+use Domain\Article\Port\ArticleRepositoryInterface;
+use Domain\Article\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
@@ -46,17 +46,14 @@ class InMemoryArticleRepositoryTest extends TestCase
     public static function dataProviderArticleRepositoryMethodName(): array
     {
         return [
-            'method add' => ['method' => 'add'],
-            'method get' => ['method' => 'get'],
+            'method save' => ['method' => 'save'],
+            'method find' => ['method' => 'find'],
             'method update' => ['method' => 'update'],
             'method delete' => ['method' => 'delete'],
             'method all' => ['method' => 'all'],
         ];
     }
 
-    /**
-     * @throws InvalidArticleIdException
-     */
     #[DataProvider('dataProviderArticleRepositoryMethodName')]
     public function test_in_memory_repository_implements_article_repository_interface(string $method): void
     {
@@ -64,12 +61,12 @@ class InMemoryArticleRepositoryTest extends TestCase
         $this->assertTrue(method_exists($this->repository, $method), "Method '{$method}' does not exist in InMemoryArticleRepository.");
     }
 
-    public function test_in_memory_repository_method_add_article(): void
+    public function test_in_memory_repository_method_save_article(): void
     {
-        $this->repository->add($this->article);
-        $entity = $this->repository->get($this->articleId);
+        $this->repository->save($this->article);
+        $entity = $this->repository->find($this->articleId);
 
-        $this->assertInstanceOf(Article::class, $entity, 'The added article should be an instance of Article.');
+        $this->assertInstanceOf(Article::class, $entity, 'The saved article should be an instance of Article.');
         $this->assertSame($this->articleId, $entity->id, 'The article ID should match the expected ID.');
         $this->assertSame($this->article->title, $entity->title, 'The article title should match the expected title.');
     }
@@ -83,11 +80,11 @@ class InMemoryArticleRepositoryTest extends TestCase
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
 
-        $this->repository->add($this->article);
-        $this->repository->add($article2);
+        $this->repository->save($this->article);
+        $this->repository->save($article2);
 
-        $article1 = $this->repository->get($this->articleId);
-        $article2 = $this->repository->get($article2Id);
+        $article1 = $this->repository->find($this->articleId);
+        $article2 = $this->repository->find($article2Id);
 
         $this->assertInstanceOf(Article::class, $article1, 'The first retrieved article should be an instance of Article.');
         $this->assertSame($this->articleId, $article1->id, 'The ID of the first article should match the expected ID.');
@@ -103,13 +100,13 @@ class InMemoryArticleRepositoryTest extends TestCase
 
     public function test_in_memory_repository_method_update_article(): void
     {
-        $this->repository->add($this->article);
+        $this->repository->save($this->article);
 
         $updatedArticle = new Article(id: $this->articleId, title: 'New InMemory Article Test');
 
         $this->repository->update($updatedArticle);
 
-        $entity = $this->repository->get($this->articleId);
+        $entity = $this->repository->find($this->articleId);
 
         $this->assertInstanceOf(Article::class, $entity, 'The updated article should be an instance of Article.');
         $this->assertSame($updatedArticle->title, $entity->title, 'The title of the updated article should match the new title.');
@@ -125,8 +122,8 @@ class InMemoryArticleRepositoryTest extends TestCase
         $article2Id = new ArticleId(value: 2);
         $article2 = new Article(id: $article2Id, title: 'Second InMemory Article Test');
 
-        $this->repository->add($this->article);
-        $this->repository->add($article2);
+        $this->repository->save($this->article);
+        $this->repository->save($article2);
 
         $collection = $this->repository->all();
 
@@ -135,7 +132,7 @@ class InMemoryArticleRepositoryTest extends TestCase
 
     public function test_in_memory_repository_method_delete_article_by_id(): void
     {
-        $this->repository->add($this->article);
+        $this->repository->save($this->article);
         $this->repository->delete($this->article->id);
 
         $collection = $this->repository->all();

@@ -2,9 +2,9 @@
 
 namespace App\Tests\Unit;
 
-use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\InvalidArticleIdException;
-use App\Article\Domain\ValueObject\ArticleId;
+use Domain\Article\Exception\EmptyArticleIdException;
+use Domain\Article\Exception\InvalidArticleIdException;
+use Domain\Article\ValueObject\ArticleId;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;

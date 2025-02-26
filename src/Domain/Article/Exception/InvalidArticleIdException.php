@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Article\Domain\Exception;
+namespace Domain\Article\Exception;
 
-class EmptyArticleIdException extends \Exception
+class InvalidArticleIdException extends \Exception
 {
     private const int ERROR_CODE = 1001;
 
@@ -11,7 +11,7 @@ class EmptyArticleIdException extends \Exception
         ?\Throwable $previous = null
     ) {
         $message = sprintf(
-            'Invalid value "%s" provided for "ArticleId". The value cannot be empty.',
+            'Invalid value "%s" provided for "ArticleId". The value cannot be negative or zero.',
             $value
         );
         parent::__construct($message, self::ERROR_CODE, $previous);

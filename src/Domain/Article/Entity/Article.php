@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Article\Domain\Entity;
+namespace Domain\Article\Entity;
 
-use App\Article\Domain\ValueObject\ArticleId;
+use Domain\Article\ValueObject\ArticleId;
 
 class Article
 {

@@ -1,20 +1,20 @@
 <?php
 
 
-namespace App\Article\Domain\Repository;
+namespace Domain\Article\Port;
 
-use App\Article\Domain\Entity\Article;
-use App\Article\Domain\ValueObject\ArticleId;
+use Domain\Article\Entity\Article;
+use Domain\Article\ValueObject\ArticleId;
 
 /**
  * Interface ArticleRepositoryInterface
  * @package App\Article\Domain\Repository
  * Cette interface représente le contrat que doit respecter un repository de post.
  *  Elle contient les méthodes suivantes :
- *  - add (Article $post) : ajoute un post
+ *  - save (Article $post) : ajoute un post
  *  - update (Article $post) : met à jour un post
  *  - remove (ArticleId $id) : supprime un post
- *  - get (ArticleId $id) : récupère un post par son identifiant
+ *  - find (ArticleId $id) : récupère un post par son identifiant
  *  - all() : récupère tous les posts
  */
 interface ArticleRepositoryInterface
@@ -23,14 +23,14 @@ interface ArticleRepositoryInterface
      * Ajoute un article
      * @param Article $article
      */
-    public function add(Article $article): void;
+    public function save(Article $article): void;
 
     /**
      * Récupère un article
      * @param ArticleId $articleId
      * @return Article|null
  */
-    public function get(ArticleId $articleId): ?Article;
+    public function find(ArticleId $articleId): ?Article;
 
     /**
      * Met à jour un post

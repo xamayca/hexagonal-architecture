@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Article\Application\Repository;
+namespace Application\Article\Adapter;
 
-use App\Article\Domain\Entity\Article;
-use App\Article\Domain\Repository\ArticleRepositoryInterface;
-use App\Article\Domain\ValueObject\ArticleId;
+use Domain\Article\Entity\Article;
+use Domain\Article\Port\ArticleRepositoryInterface;
+use Domain\Article\ValueObject\ArticleId;
 
 /**
  * Classe InMemoryArticleRepository
@@ -15,10 +15,10 @@ use App\Article\Domain\ValueObject\ArticleId;
  *  une manipulation des données sans nécessiter de base de données.
  *
  *  Méthodes disponibles :
- *  - get(ArticleId $articleId): Article
+ *  - find(ArticleId $articleId): Article
  *    Récupère un article par son identifiant.
  *
- *  - add(Article $article): void
+ *  - save(Article $article): void
  *    Ajoute un nouvel article à la collection.
  *
  *  - update(Article $article): void
@@ -41,12 +41,12 @@ class InMemoryArticleRepository implements ArticleRepositoryInterface
      */
     private array $collection = [];
 
-    public function get(ArticleId $articleId): Article
+    public function find(ArticleId $articleId): Article
     {
         return $this->collection[$articleId->value];
     }
 
-    public function add(Article $article): void
+    public function save(Article $article): void
     {
         $this->collection[$article->id->value] = $article;
     }

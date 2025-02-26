@@ -19,12 +19,13 @@ class ComposerStaticInitaefd116dc122740939d3105970738c20
         ),
         'D' => 
         array (
+            'Domain\\' => 7,
             'DeepCopy\\' => 9,
         ),
         'A' => 
         array (
+            'Application\\' => 12,
             'App\\Tests\\' => 10,
-            'App\\' => 4,
         ),
     );
 
@@ -33,17 +34,21 @@ class ComposerStaticInitaefd116dc122740939d3105970738c20
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
         ),
+        'Domain\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Domain',
+        ),
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+        'Application\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Application',
+        ),
         'App\\Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
-        ),
-        'App\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src',
         ),
     );
 

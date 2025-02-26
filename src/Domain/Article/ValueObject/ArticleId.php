@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Article\Domain\ValueObject;
+namespace Domain\Article\ValueObject;
 
-use App\Article\Domain\Exception\EmptyArticleIdException;
-use App\Article\Domain\Exception\InvalidArticleIdException;
+use Domain\Article\Exception\EmptyArticleIdException;
+use Domain\Article\Exception\InvalidArticleIdException;
 
 readonly class ArticleId
 {
