@@ -1,40 +1,49 @@
 {
-    "name": "xamayca/project",
-    "description": "Learn top play with hexagonal architecture.",
-    "type": "application",
+    "name": "xamayca/hexagonal-architecture",
+    "description": "PHP project demonstrating Hexagonal Architecture (Ports & Adapters) implementation.",
+    "version": "0.1.0",
+    "type": "project",
+    "keywords": [
+        "php",
+        "hexagonal",
+        "architecture",
+        "ports",
+        "adapters"
+    ],
+    "homepage": "https://github.com/xamayca/hexagonal-architecture",
     "license": "MIT",
-    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "xamayca",
+            "email": "christopher.hariouat@gmail.com",
+            "homepage": "https://github.com/xamayca",
+            "role": "Developer"
+        }
+    ],
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/xamayca/hexagonal-architecture"
+        }
+    ],
+    "require": {
+        "php": "^8.5"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.5"
+    },
     "autoload": {
         "psr-4": {
             "Domain\\": "src/Domain",
-            "Application\\": "src/Application"
+            "Application\\": "src/Application",
+            "Infrastructure\\": "src/Infrastructure"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "App\\Tests\\": "tests/"
         }
-    },
-    "authors": [
-        {
-            "name": "xamayca",
-            "email": "christopher.hariouat@gmail.com",
-            "role": "Developer",
-            "homepage": "https://github.com/xamayca"
-        }
-    ],
-    "funding": [
-        {
-            "type": "github repository",
-            "url": "https://github.com/xamayca"
-        }
-    ],
-    "require": {
-        "php": "^8.4"
-    },
-    "require-dev": {
-        "phpstan/phpstan": "^2.1",
-        "phpunit/phpunit": "^12"
     },
     "minimum-stability": "stable",
     "prefer-stable": true
