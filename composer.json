@@ -46,5 +46,12 @@
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts": {
+        "phpstan": "vendor/bin/phpstan analyse",
+        "test": "vendor/bin/phpunit",
+        "test:unit": "@test --testsuite=Unit",
+        "test:integration": "@test --testsuite=Integration",
+        "test:functional": "@test --testsuite=Functional"
+    }
 }
