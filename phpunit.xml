@@ -1,29 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="vendor/autoload.php"
          cacheDirectory=".phpunit.cache"
-         executionOrder="depends,defects"
-         requireCoverageMetadata="true"
-         beStrictAboutCoverageMetadata="true"
-         beStrictAboutOutputDuringTests="true"
-         displayDetailsOnPhpunitDeprecations="true"
-         failOnPhpunitDeprecation="true"
-         failOnRisky="true"
-         failOnWarning="true"
          colors="true"
+         columns="max"
+         requireCoverageMetadata="true"
+         failOnWarning="true"
+         failOnRisky="true"
+         failOnDeprecation="true"
+         failOnPhpunitDeprecation="true"
+         failOnPhpunitNotice="true"
+         failOnNotice="true"
+         failOnSkipped="true"
+         failOnIncomplete="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutCoverageMetadata="true"
+         executionOrder="depends,defects"
          testdox="true"
+         testdoxSummary="true"
+         displayDetailsOnAllIssues="true"
 >
 
     <testsuites>
+        <testsuite name="Tests">
+            <directory>tests</directory>
+        </testsuite>
         <testsuite name="Unit">
             <directory>tests/Unit</directory>
         </testsuite>
+        <testsuite name="Functional">
+            <directory>tests/Functional</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
     </testsuites>
 
-    <source ignoreIndirectDeprecations="true" restrictNotices="true" restrictWarnings="true">
+    <source>
         <include>
             <directory>src</directory>
         </include>
     </source>
+
 </phpunit>
