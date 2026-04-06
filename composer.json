@@ -35,9 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Domain\\": "src/User/Domain",
-            "Application\\": "src/Application",
-            "Infrastructure\\": "src/User/Infrastructure"
+            "App\\": "src/"
         }
     },
     "autoload-dev": {
