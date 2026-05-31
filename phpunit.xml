@@ -19,7 +19,6 @@
          beStrictAboutCoverageMetadata="true"
          executionOrder="depends,defects"
          testdox="true"
-         testdoxSummary="true"
          displayDetailsOnAllIssues="true"
 >
 
