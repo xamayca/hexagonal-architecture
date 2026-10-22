@@ -55,7 +55,12 @@
         "preferred-install": "dist"
     },
     "scripts": {
-        "phpstan": "vendor/bin/phpstan analyse",
+        "cs": "vendor/bin/php-cs-fixer check --verbose",
+        "cs:list": "vendor/bin/php-cs-fixer list-rules",
+        "cs:fix": "vendor/bin/php-cs-fixer fix",
+        "cs:desc": "vendor/bin/php-cs-fixer describe @ --config=.php-cs-fixer.dist.php --expand",
+        "cs:desc:cs3": "vendor/bin/php-cs-fixer describe @PER-CS3x0 --expand",
+        "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/phpunit",
         "test:unit": "@test --testsuite=Unit",
         "test:integration": "@test --testsuite=Integration",
