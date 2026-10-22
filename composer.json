@@ -1,6 +1,6 @@
 {
-    "name": "xamayca/hexagonal-architecture",
-    "description": "PHP project demonstrating Hexagonal Architecture (Ports & Adapters) implementation.",
+    "name": "xamayca/doomdash",
+    "description": "A self-hosted dashboard for managing and monitoring your services, system information, media, weather, and more.",
     "version": "0.1.0",
     "type": "project",
     "keywords": [
@@ -8,9 +8,11 @@
         "hexagonal",
         "architecture",
         "ports",
-        "adapters"
+        "adapters",
+        "dashboard",
+        "widget"
     ],
-    "homepage": "https://github.com/xamayca/hexagonal-architecture",
+    "homepage": "https://github.com/xamayca/doomdash",
     "license": "MIT",
     "authors": [
         {
@@ -23,7 +25,7 @@
     "funding": [
         {
             "type": "github",
-            "url": "https://github.com/xamayca/hexagonal-architecture"
+            "url": "https://github.com/xamayca/doomdash"
         }
     ],
     "require": {
@@ -31,8 +33,9 @@
         "ext-curl": "*"
     },
     "require-dev": {
-        "phpstan/phpstan": "^2.2",
-        "phpunit/phpunit": "^13.2"
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.3",
+        "phpunit/phpunit": "^13.4"
     },
     "autoload": {
         "psr-4": {
